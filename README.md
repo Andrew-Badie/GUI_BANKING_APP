@@ -1,86 +1,66 @@
-# Bank Application 🏦💻
+# JavaFX Bank Application
 
-A Java-based GUI bank application built using JavaFX. The application allows users to create, manage, and delete bank accounts. It includes features such as account creation, deposit, withdrawal, and balance checking. This project demonstrates object-oriented programming principles and graphical user interface design.
+A Java desktop banking application I built as an object-oriented programming project using **Java, JavaFX, and FXML**.
 
-Table of Contents
-Introduction
-Features
-Technologies Used
-Installation
-Usage
-Code Structure
-Contributions
-License
-## Introduction
-
-The Bank Application is a GUI-based Java application developed using JavaFX. It provides functionalities for creating customer accounts, performing banking operations (deposit, withdraw, check balance), and managing customers through a simple interface. This project showcases skills in Java programming, file handling, and GUI design with JavaFX.
+The application has separate manager and customer flows, stores customer information locally in text files, and supports basic banking operations such as deposits, withdrawals, purchases, and balance checks.
 
 ## Features
 
-Login System: Supports login for both customers and managers with role-based access.
-Account Creation: Managers can add new customer accounts by providing a username and password.
-Deposit and Withdraw: Customers can deposit money into their accounts or withdraw funds, provided they meet the requirements.
-Purchase: Allows customers to make purchases, updating their account balance accordingly.
-Check Balance: Customers can view their current account balance.
-Account Deletion: Managers can delete customer accounts.
-Logout Functionality: Provides a confirmation alert for logging out.
-Error Handling: Displays error messages for invalid input or incorrect actions (e.g., incorrect username or password).
-## Technologies Used
+### Manager
 
-Java: Core programming language for building the application.
-JavaFX: For creating the graphical user interface.
-File Handling: Uses Java's File, FileReader, FileWriter, and BufferedReader for reading and writing customer data to text files.
-Object-Oriented Programming (OOP): Implements principles of OOP for managing customer accounts.
-## Installation
+- Log in through the manager role
+- Create customer accounts
+- Delete customer accounts
+- Manage locally stored customer records
 
-To run the application locally, follow these steps:
+### Customer
 
-Clone the repository: ```bash git clone https://github.com/yourusername/bank-application.git ```
+- Log in with a username and password
+- View the current account balance
+- Deposit money
+- Withdraw money while preventing the balance from going below zero
+- Make purchases with account-level rules
+- Log out through the JavaFX interface
 
-Navigate to the project directory: ```bash cd bank-application ```
+The application also assigns customer levels based on balance:
 
-Compile the Java files: ```bash javac -d bin src/hellofx/*.java ```
+- **Silver:** below $10,000
+- **Gold:** $10,000 to under $20,000
+- **Platinum:** $20,000 or more
 
-Run the application: ```bash java -cp bin hellofx.hellofx ```
+The purchase logic applies different fees depending on the customer's level.
 
-## Usage
+## Technologies
 
-Launch the application:
+- Java
+- JavaFX
+- FXML
+- File I/O (`FileReader`, `FileWriter`, `BufferedReader`)
+- Object-oriented programming
 
-Use the command provided in the installation steps to start the application.
-Login:
+## Main files
 
-For managers: Use the username "admin", password "admin", and role "manager".
-For customers: Enter a valid username, password, and role "customer". The customer data is stored in text files created during account registration.
-Managing Customer Accounts (Manager):
+```text
+Controller.java      Login and role-based navigation
+Controller2.java     Manager account-management actions
+Customer.java        Customer banking operations and business rules
+hellofx.fxml         Login interface
+hellofx2.fxml        Manager interface
+addCustomer.fxml     Customer banking interface
+```
 
-Add Customer: Enter a username and password, then click Add Customer to create a new account.
-Delete Customer: Enter the customer's username and click Delete Customer to remove the account.
-Banking Operations (Customer):
+## How it works
 
-Deposit: Enter an amount in the "Deposit/Withdraw Amount" field, then click Deposit.
-Withdraw: Enter an amount in the "Deposit/Withdraw Amount" field, then click Withdraw. The amount must be less than or equal to the current balance.
-Purchase: Enter an amount in the "Purchase Amount" field, then click Purchase. The balance is updated based on the transaction.
-Check Balance: Click Get Balance to display the current account balance.
-Logout:
+Customer records are stored in local text files. The program reads those files when a customer logs in or performs an operation and writes the updated balance and account level back to the file after a successful transaction.
 
-Click the Logout button to log out. A confirmation dialog will appear to confirm the action.
-## Code Structure
+The GUI is built with JavaFX and FXML, with controller classes handling the user actions for the different screens.
 
-JavaFX Files:
-Controller.java: Handles the login process, logout, and user interaction for customers.
-Controller2.java: Manages customer account creation, deletion, and additional manager-related actions.
-Customer.java: Contains methods for banking operations (deposit, withdraw, purchase, check balance) and enforces business logic and rules.
-hellofx.java: The main entry point for the application that sets up the initial GUI.
-FXML Files:
-hellofx.fxml: Layout for the login screen and the customer interface.
-addCustomer.fxml: Layout for the manager's interface for adding and deleting customer accounts.
-Resource Files:
-Text Files: Stores customer data (username, password, balance) for persistence across sessions.
-## Contributions
+## Running the project
 
-Contributions are welcome! If you have suggestions for new features, code improvements, or bug fixes, feel free to submit a pull request or open an issue.
+This project requires a Java installation with JavaFX configured. Open the project in a Java IDE with JavaFX support, keep the Java source and FXML resources available to the `hellofx` package, and run the application's JavaFX entry point.
 
-## License
+Because JavaFX setup differs by JDK and IDE, the exact VM/module configuration may need to be adjusted for your environment.
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Project note
+
+This was an educational OOP project and is **not intended to be a production banking system**. It uses local text-file storage and simple demo authentication rather than a database, encrypted credential storage, or a production security model.
